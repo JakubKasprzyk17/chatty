@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "expo-template-default",
+    "name": "Chatty",
+    "slug": "chatty",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -13,13 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jakubkasprzyk.chatty"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jakubkasprzyk.chatty"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +33,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e7994c4a-7fc0-42da-82bb-90dc67e6d334"
+      }
+    },
+    "owner": "jakubkasprzyk",
+    "updates": {
+      "url": "https://u.expo.dev/e7994c4a-7fc0-42da-82bb-90dc67e6d334"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
