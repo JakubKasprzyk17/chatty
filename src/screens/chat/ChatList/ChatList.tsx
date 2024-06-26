@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Login = () => {
+const ChatList = () => {
   return (
     <View>
-      <Text>Login</Text>
+      <Text>ChatList</Text>
     </View>
   );
 };
 
-export default Login;
+export default ChatList;
 
-const styles = StyleSheet.create({});
+const s = StyleSheet.create({});
