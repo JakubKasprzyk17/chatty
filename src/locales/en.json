@@ -1,1 +1,23 @@
-{}
+{
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "loginSubtitle": "Log in and stay in touch with everyone!",
+    "email": "e-mail address",
+    "password": "password",
+    "passwordCopy": "password confirmation",
+    "login": "Log in",
+    "signUp": "Sign up",
+    "dontHaveAccount": "Don’t have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "createAccount": "Create account",
+    "firstName": "first name",
+    "lastName": "last name",
+    "terms": "By signing up you agree with <Terms><Text>Terms and Conditions</Text></Terms> and <Privacy><Text>Privacy Policy</Text></Privacy>"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid e-mail address",
+    "minLength": "Minimum length is {{min}}",
+    "passwordsMustBeSame": "Passwords must be the same"
+  }
+}
