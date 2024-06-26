@@ -11,6 +11,7 @@
           "_components": "./src/components",
           "_constants": "./src/constants",
           "_graphql": "./src/graphql",
+          "_hooks": "./src/hooks",
           "_icons": "./src/assets/icons",
           "_locales": "./src/locales",
           "_navigations": "./src/navigations",
