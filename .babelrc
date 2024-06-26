@@ -1,0 +1,26 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "cwd": "packagejson",
+        "root": ["./src"],
+        "extensions": [".js", ".tsx", ".ts"],
+        "alias": {
+          "_assets": "./src/assets",
+          "_components": "./src/components",
+          "_constants": "./src/constants",
+          "_graphql": "./src/graphql",
+          "_icons": "./src/assets/icons",
+          "_locales": "./src/locales",
+          "_navigations": "./src/navigations",
+          "_screens": "./src/screens",
+          "_services": "./src/services",
+          "_store": "./src/store",
+          "_styles": "./src/styles",
+          "_types": "./src/types"
+        }
+      }
+    ]
+  ]
+}
