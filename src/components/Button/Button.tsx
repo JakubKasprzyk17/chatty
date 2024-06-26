@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Pressable,
   PressableProps,
   StyleProp,
   StyleSheet,
   Text,
+  TouchableHighlight,
   ViewStyle,
 } from 'react-native';
 
@@ -18,9 +18,12 @@ interface ButtonProps extends PressableProps {
 
 const Button = ({ onPress, label, style }: ButtonProps) => {
   return (
-    <Pressable onPress={onPress} style={[s.container, style]}>
+    <TouchableHighlight
+      onPress={onPress}
+      style={[s.container, style]}
+      underlayColor={Colors.PLUM[700]}>
       <Text style={s.label}>{label}</Text>
-    </Pressable>
+    </TouchableHighlight>
   );
 };
 

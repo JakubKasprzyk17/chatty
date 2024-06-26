@@ -27,12 +27,23 @@ interface InputProps extends TextInputProps {
   active?: boolean;
   error?: string;
   passwordInput?: boolean;
+  editable?: boolean;
 }
 
 // eslint-disable-next-line react/display-name
 const Input = forwardRef<TextInput, InputProps>(
   (
-    { label, onChangeText, onBlur, onResetText, value, error, passwordInput },
+    {
+      label,
+      onChangeText,
+      onBlur,
+      onResetText,
+      value,
+      error,
+      passwordInput,
+      editable,
+      ...rest
+    },
     ref,
   ) => {
     const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -42,8 +53,22 @@ const Input = forwardRef<TextInput, InputProps>(
       if (error) {
         return Colors.ERROR;
       }
+      if (editable === undefined) {
+        return Colors.WHITE;
+      }
+      if (!editable) {
+        return Colors.GRAY[100];
+      }
       return isFocused ? Colors.PLUM[500] : Colors.WHITE;
-    }, [isFocused, error]);
+    }, [error, editable, isFocused]);
+
+    const backgroundColor = useMemo(() => {
+      console.log(editable);
+      if (editable === undefined) {
+        return Colors.WHITE;
+      }
+      return editable ? Colors.WHITE : Colors.GRAY[100];
+    }, [editable]);
 
     const handleBlur = useCallback(
       (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
@@ -55,8 +80,8 @@ const Input = forwardRef<TextInput, InputProps>(
     );
     return (
       <View style={s.container}>
-        <Text style={s.label}>{label}</Text>
-        <View style={[s.inputWrapper, { borderColor }]}>
+        <Text style={[s.label, { color: backgroundColor }]}>{label}</Text>
+        <View style={[s.inputWrapper, { borderColor, backgroundColor }]}>
           <TextInput
             style={s.textInput}
             ref={ref}
@@ -65,6 +90,7 @@ const Input = forwardRef<TextInput, InputProps>(
             onBlur={handleBlur}
             onFocus={() => setIsFocused(true)}
             secureTextEntry={passwordInput && !isPasswordShown}
+            {...rest}
           />
           {passwordInput ? (
             <Animated.View entering={FadeInRight} exiting={FadeOutRight}>
@@ -104,7 +130,6 @@ const s = StyleSheet.create({
     marginVertical: 5,
   },
   label: {
-    color: Colors.WHITE,
     ...Typography.TEXT,
     lineHeight: 22.5,
     marginBottom: 5,
