@@ -42,4 +42,18 @@ export const TEXT = {
     fontSize: 10,
     lineHeight: 10,
   },
+  bodyText: {
+    fontFamily: POPINS.regular,
+    fontSize: 14,
+  },
+  boldCaption: {
+    fontFamily: POPINS.bold,
+    fontSize: 12,
+    lineHeight: 16,
+  },
+  specialText: {
+    fontFamily: POPINS.regular,
+    fontSize: 12,
+    lineHeight: 16,
+  },
 };
