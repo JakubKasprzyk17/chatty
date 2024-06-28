@@ -11,8 +11,8 @@ export enum AuthRoutes {
 }
 
 export enum AppRoutes {
-  ChatList = 'ChatList',
-  ChatRoom = 'ChatRoom',
+  ChatRooms = 'ChatRooms',
+  Chat = 'Chat',
 }
 
 export type RootNavigatorParamsList = {
@@ -26,6 +26,6 @@ export type AuthNavigatorParamsList = {
 };
 
 export type AppNavigatorParamsList = {
-  [AppRoutes.ChatList]: undefined;
-  [AppRoutes.ChatRoom]: { id: string };
+  [AppRoutes.ChatRooms]: undefined;
+  [AppRoutes.Chat]: { id: string };
 };
