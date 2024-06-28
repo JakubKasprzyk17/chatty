@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   createNotifications,
@@ -7,11 +7,13 @@ import {
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import i18next from 'i18next';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { client } from 'src/graphql/client';
 
 import { ApolloProvider } from '@apollo/client';
+import NetInfo from '@react-native-community/netinfo';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { i18n } from '_locales';
@@ -30,17 +32,7 @@ const App = () => {
     'Poppins-Bold': require('./src/assets/fonts/Poppins-Bold.ttf'),
   });
 
-  useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
-
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
-
-  const { NotificationsProvider } = createNotifications({
+  const { NotificationsProvider, notify } = createNotifications({
     duration: 1000,
     notificationPosition: 'top',
     animationConfig: SlideInLeftSlideOutRight,
@@ -48,6 +40,34 @@ const App = () => {
     defaultStylesSettings: {},
     gestureConfig: { direction: 'y' },
   });
+
+  useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      if (!state.isConnected) {
+        notify('error', {
+          params: {
+            title: i18next.t('errors.error'),
+            description: i18next.t('errors.noInternetConnection'),
+          },
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [notify]);
+
+  if (!fontsLoaded && !fontError) {
+    SplashScreen.hideAsync();
+    return null;
+  }
 
   return (
     <Provider store={store}>

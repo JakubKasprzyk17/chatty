@@ -22,7 +22,8 @@
     "invalidCredentials": "Invalid credentials",
     "error": "Error",
     "invalidLink": "Invalid link",
-    "roomNotFound": "Room not found"
+    "roomNotFound": "Room not found",
+    "noInternetConnection": "No internet connection"
   },
   "chat": {
     "rooms": "Rooms",
