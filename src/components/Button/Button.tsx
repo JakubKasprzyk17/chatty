@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   PressableProps,
   StyleProp,
   StyleSheet,
@@ -13,16 +14,29 @@ import { Colors, Typography } from '_styles';
 interface ButtonProps extends PressableProps {
   label: string;
   onPress: () => void;
+  loading?: boolean;
+  disabled?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
-const Button = ({ onPress, label, style }: ButtonProps) => {
+const Button = ({ onPress, label, loading, disabled, style }: ButtonProps) => {
   return (
     <TouchableHighlight
       onPress={onPress}
-      style={[s.container, style]}
+      disabled={disabled || loading}
+      style={[
+        s.container,
+        style,
+        {
+          backgroundColor: disabled ? Colors.GRAY[300] : Colors.PLUM[500],
+        },
+      ]}
       underlayColor={Colors.PLUM[700]}>
-      <Text style={s.label}>{label}</Text>
+      {loading ? (
+        <ActivityIndicator color={Colors.WHITE} />
+      ) : (
+        <Text style={s.label}>{label}</Text>
+      )}
     </TouchableHighlight>
   );
 };
@@ -32,7 +46,7 @@ export default Button;
 const s = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: Colors.PLUM[500],
+
     justifyContent: 'center',
     alignItems: 'center',
     height: 48,

@@ -63,7 +63,6 @@ const Input = forwardRef<TextInput, InputProps>(
     }, [error, editable, isFocused]);
 
     const backgroundColor = useMemo(() => {
-      console.log(editable);
       if (editable === undefined) {
         return Colors.WHITE;
       }
