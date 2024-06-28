@@ -18,6 +18,14 @@
     "required": "This field is required",
     "invalidEmail": "Invalid e-mail address",
     "minLength": "Minimum length is {{min}}",
-    "passwordsMustBeSame": "Passwords must be the same"
+    "passwordsMustBeSame": "Passwords must be the same",
+    "invalidCredentials": "Invalid credentials",
+    "error": "Error",
+    "invalidLink": "Invalid link",
+    "roomNotFound": "Room not found"
+  },
+  "chat": {
+    "rooms": "Rooms",
+    "activeNow": "Active now"
   }
 }
