@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { setAsyncStorageToken } from 'src/utils';
 import * as Yup from 'yup';
 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -48,6 +49,8 @@ const Login = ({ navigation }: LoginProps) => {
 
   const [loginMutation, { loading }] = useLoginMutation(async data => {
     if (!data.loginUser?.user) return;
+    if (!data.loginUser?.token) return;
+    setAsyncStorageToken(data.loginUser.token);
 
     const user = {
       ...data.loginUser.user,
@@ -64,11 +67,6 @@ const Login = ({ navigation }: LoginProps) => {
   const onSubmit = async (values: FormValues) => {
     await loginMutation({
       variables: values,
-      // variables: {
-
-      //   email: 'emmy.sizergh@mail.com',
-      //   password: 'MO0pnceEzLb0Arp',
-      // },
     });
   };
 
@@ -122,6 +120,7 @@ const Login = ({ navigation }: LoginProps) => {
               <Button
                 label={t('auth.login')}
                 disabled={isSubmitting}
+                loading={loading}
                 onPress={handleSubmit}
               />
               <View

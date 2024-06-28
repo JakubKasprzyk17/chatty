@@ -158,6 +158,7 @@ const Register = ({ navigation }: RegisterProps) => {
               label={t('auth.signUp')}
               style={{ marginTop: 25 }}
               disabled={isSubmitting}
+              loading={loading}
               onPress={handleSubmit}
             />
             <Terms />
