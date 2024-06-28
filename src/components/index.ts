@@ -1,3 +1,11 @@
 export { default as Button } from './Button/Button';
 export { default as Input } from './Input/Input';
 export { default as Terms } from './Terms/Terms';
+export { default as Header } from './Header/Header';
+export { HeaderType } from './Header/Header';
+export { default as ChatItem } from './ChatItem/ChatItem';
+export { default as Messages } from './Messages/Messages';
+export { default as RenderSend } from './RenderSend/RenderSend';
+export { default as RenderInputToolbar } from './RenderInputToolbar/RenderInputToolbar';
+export { default as RenderMessage } from './RenderMessage/RenderMessage';
+export { default as UserTyping } from './UserTyping/UserTyping';
