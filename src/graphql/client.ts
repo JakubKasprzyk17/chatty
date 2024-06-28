@@ -15,13 +15,15 @@ import { getMainDefinition } from '@apollo/client/utilities';
 
 let token: string | null = null;
 
+const appUri = process.env.EXPO_PUBLIC_API_URL_GRAPHQL;
+const appSocketUri = process.env.EXPO_PUBLIC_API_URL_SOCKET;
+
 const httpLink = createHttpLink({
-  uri: 'https://chat.thewidlarzgroup.com/api/graphql',
+  uri: appUri,
 });
 
 getAsyncStorageToken().then(t => {
   token = t || '';
-  console.log('token', token);
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -35,14 +37,11 @@ const authLink = setContext((_, { headers }) => {
 
 const authedHttpLink = authLink.concat(httpLink);
 
-const phoenixSocket = new PhoenixSocket(
-  'wss://chat.thewidlarzgroup.com/socket',
-  {
-    params: () => {
-      return { token };
-    },
+const phoenixSocket = new PhoenixSocket(appSocketUri!, {
+  params: () => {
+    return { token };
   },
-);
+});
 
 const absintheSocket = AbsintheSocket.create(phoenixSocket);
 const websocketLink = createAbsintheSocketLink(
