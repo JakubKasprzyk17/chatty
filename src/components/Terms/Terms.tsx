@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { Alert, Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
+import { notify } from 'react-native-notificated';
 import * as Linking from 'expo-linking';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -15,7 +16,12 @@ const Terms = () => {
       if (supported) {
         await Linking.openURL(url);
       } else {
-        Alert.alert(`${t('failedToOpenLink')}: ${url}`);
+        notify('error', {
+          params: {
+            title: t('errors.error'),
+            description: t('errors.invalidLink'),
+          },
+        });
       }
     },
     [t],
