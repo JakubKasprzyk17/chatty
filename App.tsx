@@ -1,11 +1,17 @@
 import React, { useCallback } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {
+  createNotifications,
+  SlideInLeftSlideOutRight,
+} from 'react-native-notificated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
+import { client } from 'src/graphql/client';
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { i18n } from '_locales';
@@ -34,20 +40,28 @@ const App = () => {
     return null;
   }
 
-  const client = new ApolloClient({
-    uri: 'https://chat.thewidlarzgroup.com/api/graphql',
-    cache: new InMemoryCache(),
+  const { NotificationsProvider } = createNotifications({
+    duration: 1000,
+    notificationPosition: 'top',
+    animationConfig: SlideInLeftSlideOutRight,
+    isNotch: true,
+    defaultStylesSettings: {},
+    gestureConfig: { direction: 'y' },
   });
 
   return (
     <Provider store={store}>
       <ApolloProvider client={client}>
         <I18nextProvider i18n={i18n}>
-          <SafeAreaProvider>
-            <NavigationContainer>
-              <RootNavigator />
-            </NavigationContainer>
-          </SafeAreaProvider>
+          <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
+            <SafeAreaProvider>
+              <NotificationsProvider>
+                <NavigationContainer>
+                  <RootNavigator />
+                </NavigationContainer>
+              </NotificationsProvider>
+            </SafeAreaProvider>
+          </GestureHandlerRootView>
         </I18nextProvider>
       </ApolloProvider>
     </Provider>
